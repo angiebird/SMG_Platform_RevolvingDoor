@@ -148,7 +148,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   	}
   	else{
   		sendServerMessage('GET_GAMES', [{
-        getGames: { gameId: "5207025210359808" }
+        getGames: { gameId: "6311705697058816" }
       }]);
   	}
   }

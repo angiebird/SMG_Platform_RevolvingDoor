@@ -88,6 +88,8 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
 
   $scope.gotoGame = function (playMode) {
     interComService.setPlayMode(playMode);
+    var obj = {};
+    interComService.setMatch(obj);
     $location.path('game');
   };
   
@@ -106,6 +108,24 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     else{
     	guestLogin();
     }
+  }
+  
+  $scope.fbLogin = function(){
+    FB.getLoginStatus(fbCallback);
+  }
+  
+  function fbCallback(response){
+  	console.log(response);
+  	$scope.fbAccessToken = response.authResponse.accessToken;
+    var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
+                    {
+                      socialLogin: {
+                        accessToken: $scope.fbAccessToken,
+                        uniqueType: "F"
+                      }
+                    }
+    ];
+    sendServerMessage('FB_LOGIN', obj);
   }
 
   function guestLogin() {
@@ -134,6 +154,9 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
       updateGameList(resObj);
     } else if (type === 'REGISTER_PLAYER') {
       updatePlayerInfo(resObj);
+    } else if (type === 'FB_LOGIN') {
+      updatePlayerInfo(resObj);
+      //updateFBInfo(resObj);
     }
   }
 

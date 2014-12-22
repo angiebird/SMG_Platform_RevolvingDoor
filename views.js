@@ -26,6 +26,11 @@ myApp.config(['$routeProvider', '$locationProvider',
         controllerAs: 'loginCtrl'
         	
       })
+      .when('/accessToken/:accessToken', {
+        templateUrl: 'login.html',
+        controller: 'loginCtrl',
+        controllerAs: 'loginCtrl'
+      })
       .when('/index.html', {
         templateUrl: 'login.html',
         controller: 'loginCtrl'
@@ -79,6 +84,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   var playerInfo = null;
 
   getGames();
+  fbLogin();
   updatePlayer();
 
   $scope.guestLogin = guestLogin;
@@ -110,6 +116,21 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     }
   }
   
+  function fbLogin(){
+  		if($routeParams.accessToken != "undefined"){
+    	var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
+    	                {
+    	                  socialLogin: {
+    	                    accessToken: $routeParams.accessToken,
+    	                    uniqueType: "F"
+    	                  }
+    	                }
+    	];
+    	sendServerMessage('FB_LOGIN', obj);
+  	}
+  }
+  
+  /*
   $scope.fbLogin = function(){
     FB.getLoginStatus(fbCallback);
   }
@@ -127,6 +148,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     ];
     sendServerMessage('FB_LOGIN', obj);
   }
+  */
 
   function guestLogin() {
     var avatarLs = ["bat", "devil", "mike", "scream", "squash"];

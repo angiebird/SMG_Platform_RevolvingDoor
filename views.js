@@ -104,7 +104,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   };
 
   function updatePlayer() {
-    if (typeof(Storage) != "undefined" && localStorage.getItem("playerInfo") != undefined) {
+    if (typeof(Storage) != "undefined" && localStorage.getItem("playerInfo") != "undefined") {
       playerInfo = angular.fromJson(localStorage.getItem("playerInfo"));
     }
     if (playerInfo) {

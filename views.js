@@ -104,10 +104,10 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   };
 
   function updatePlayer() {
-    if (typeof(Storage) != "undefined") {
+    if (typeof(Storage) != "undefined" && localStorage.getItem("playerInfo") != undefined) {
       playerInfo = angular.fromJson(localStorage.getItem("playerInfo"));
     }
-    if (playerInfo != null) {
+    if (playerInfo) {
     	$scope.playerInfo = playerInfo;
       interComService.setUser(playerInfo);
     }
@@ -117,7 +117,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   }
   
   function fbLogin(){
-  		if($routeParams.accessToken != "undefined"){
+  	if($routeParams.accessToken != "undefined"){
     	var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
     	                {
     	                  socialLogin: {

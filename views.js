@@ -117,7 +117,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   }
   
   function fbLogin(){
-  	if($routeParams.accessToken != "undefined"){
+  		if($routeParams.accessToken){
     	var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
     	                {
     	                  socialLogin: {
@@ -130,7 +130,6 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   	}
   }
   
-  /*
   $scope.fbLogin = function(){
     FB.getLoginStatus(fbCallback);
   }
@@ -148,7 +147,6 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     ];
     sendServerMessage('FB_LOGIN', obj);
   }
-  */
 
   function guestLogin() {
     var avatarLs = ["bat", "devil", "mike", "scream", "squash"];

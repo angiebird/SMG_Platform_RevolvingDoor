@@ -411,8 +411,6 @@ myApp.controller('gameCtrl',
     AutoGameRefresher = $interval(function() {
       checkGameUpdates()
     }, 10000);
-    
-    registerForPushNotification();
 
     function stopAutoGameRefresher() {
         if (angular.isDefined(AutoGameRefresher)) {

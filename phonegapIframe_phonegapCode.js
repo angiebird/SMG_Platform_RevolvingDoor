@@ -98,7 +98,6 @@ window.sendMessageToPlatform = function (message) {
 }
 window.sendToken = function (token, error) {
   sendMessageToPlatform({token: token, error: error});
-  registerForPushNotification();
 }
 window.fbLoginSuccess = function (userData) {
     facebookConnectPlugin.getAccessToken(function(token) {
@@ -109,6 +108,7 @@ window.fbLoginSuccess = function (userData) {
 }
 
 window.onDeviceReady = function () {
+  	registerForPushNotification();
     facebookConnectPlugin.login(["public_profile"],
         fbLoginSuccess,
         function (error) { sendToken("", error); }

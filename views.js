@@ -213,14 +213,14 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     localStorage.setItem("playerInfo", angular.toJson(playerInfo, true));
     updatePlayer();
   };
-  function registerDevice() {
+  function registerDevice(regid) {
       var thePlayer = interComService.getUser();
       var regObj = [{
           registerForPushNotifications: {
               myPlayerId: thePlayer.myPlayerId,
               accessSignature: thePlayer.accessSignature,
               gameId: "6311705697058816",
-              registrationId: $rootScope.regid,
+              registrationId: regid,
               platformType: "ANDROID"
           }
       }];
@@ -236,7 +236,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     else if(message.regid !== undefined){
     	//alert("get regid: " + message.regid);
     	console.log("get regid: " + message.regid);
-    	registerDevice();
+    	registerDevice(message.regid);
     }
   })
 })

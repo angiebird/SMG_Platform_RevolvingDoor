@@ -67,7 +67,7 @@ window.onNotification = function (e) {
       if ( e.regid.length > 0 )
       {
         // Your GCM push server needs to know the regID before it can push to this device
-        alert('REGID:' + e.regid);
+        console.log('REGID:' + e.regid);
         //document.getElementById("regIdTextarea").value = e.regid;
 
         window.regid = e.regid;
@@ -76,7 +76,7 @@ window.onNotification = function (e) {
     break;
 
     case 'message':
-    	alert("send notification:");
+    	//alert("send notification:");
     	sendMessageToPlatform({notification: ""});
       // if this flag is set, this notification happened while we were in the foreground.
       // you might want to play a sound to get the user's attention, throw up a dialog, etc.

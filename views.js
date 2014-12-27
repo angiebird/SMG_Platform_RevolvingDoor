@@ -743,7 +743,7 @@ myApp.controller('gameCtrl',
             }
           }
         } else if(message.notification !== undefined){
-        	alert("get notification");
+        	console.log("got notification");
           stopAutoGameRefresher();
           checkGameUpdates();
         }

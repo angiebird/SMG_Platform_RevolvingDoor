@@ -75,6 +75,7 @@ window.onNotification = function (e) {
     break;
 
     case 'message':
+    	alert("send notification:");
     	sendMessageToPlatform({notification: ""});
       // if this flag is set, this notification happened while we were in the foreground.
       // you might want to play a sound to get the user's attention, throw up a dialog, etc.

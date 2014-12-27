@@ -175,6 +175,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     } else if (type === 'REGISTER_PLAYER') {
       updatePlayerInfo(resObj);
     } else if (type === 'FB_LOGIN') {
+    	alert(resObj);
       updatePlayerInfo(resObj);
       //updateFBInfo(resObj);
     }
@@ -213,7 +214,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   platformMessageService.removeMessageListener();
   platformMessageService.addMessageListener(function(message) {
     if (message.token !== undefined) {
-    	alert("get token!!!");
+    	alert("get token!!! " + message.token);
     	fbLogin(message.token);
     }
   })

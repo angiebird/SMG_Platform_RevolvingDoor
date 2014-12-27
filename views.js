@@ -179,7 +179,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
       updatePlayerInfo(resObj);
       //updateFBInfo(resObj);
     } else if (type === 'REGISTER_DEVICE') {
-        $info.log("Device Registered");
+        console.log("Device Registered");
     }
   }
 

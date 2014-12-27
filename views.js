@@ -214,19 +214,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     localStorage.setItem("playerInfo", angular.toJson(playerInfo, true));
     updatePlayer();
   };
-  function registerDevice(regid) {
-      var thePlayer = interComService.getUser();
-      var regObj = [{
-          registerForPushNotifications: {
-              myPlayerId: thePlayer.myPlayerId,
-              accessSignature: thePlayer.accessSignature,
-              gameId: "6311705697058816",
-              registrationId: regid,
-              platformType: "ANDROID"
-          }
-      }];
-      sendServerMessage('REGISTER_DEVICE', regObj);
-  }
+
   platformMessageService.removeMessageListener();
   platformMessageService.addMessageListener(function(message) {
     if (message.token !== undefined) {
@@ -746,7 +734,7 @@ myApp.controller('gameCtrl',
           }
         } else if(message.notification !== undefined){
         	console.log("got notification");
-        	alert("got notification");
+        	//alert("got notification");
           stopAutoGameRefresher();
           checkGameUpdates();
         }
@@ -789,94 +777,6 @@ myApp.controller('gameCtrl',
         }];
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
-
-    // Handles the pushed notifications from servers
-    function successHandler (result) {
-      $log.info('result = ' + result);
-    }
-    function errorHandler (error) {
-      $log.info('error = ' + error);
-    }
-    function registerForPushNotification() {
-      $log.info('registerForPushNotification for cordova.platformId:' + cordova.platformId);
-      var pushNotification = window.plugins.pushNotification;
-      if ( cordova.platformId == 'android' || cordova.platformId == 'Android' || cordova.platformId == "amazon-fireos" ){
-        pushNotification.register(
-          successHandler,
-          errorHandler,
-          {
-              "senderID":"24803504516",
-              "ecb":"onNotification"
-          });
-      } else {
-        pushNotification.register(
-          tokenHandler,
-          errorHandler,
-          {
-              "badge":"true",
-              "sound":"true",
-              "alert":"true",
-              "ecb":"onNotificationAPN"
-          });
-      }
-    }
-    // iOS
-    window.onNotificationAPN = function (event) {
-      alert('RECEIVED:' + JSON.stringify(event));
-      if ( event.alert )
-      {
-          navigator.notification.alert(event.alert);
-      }
-      if ( event.sound )
-      {
-          var snd = new Media(event.sound);
-          snd.play();
-      }
-      if ( event.badge )
-      {
-          window.plugins.pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
-      }
-    }
-    function tokenHandler(result) {
-      // Your iOS push server needs to know the token before it can push to this device
-      // here is where you might want to send it the token for later use.
-      alert('device token = ' + result);
-      document.getElementById("regIdTextarea").value = result;
-    }
-    // Android and Amazon Fire OS
-    window.onNotification = function (e) {
-      $log.info('RECEIVED:' + JSON.stringify(e));
-      switch( e.event )
-      {
-        case 'registered':
-          if ( e.regid.length > 0 )
-          {
-            // Your GCM push server needs to know the regID before it can push to this device
-            $log.info('REGID:' + e.regid);
-            window.regid = e.regid;
-            $rootScope.regid = e.regid;
-            registerDevice();
-            stopAutoGameRefresher();    // stops automatically asking server for updates every 10 seconds.
-          }
-        break;
-          case 'message':
-            $log.info('A MESSAGE NOTIFICATION IS RECEIVED!!!');
-            if ($rootScope.regid !== -1) {
-              checkGameUpdates();
-            }       
-          // if this flag is set, this notification happened while we were in the foreground.
-          // you might want to play a sound to get the user's attention, throw up a dialog, etc.
-          // e.foreground , e.coldstart          // e.soundname || e.payload.sound
-          // e.payload.message
-          // e.payload.msgcnt
-          // e.payload.timeStamp
-        break;
-        case 'error':
-          // e.msg
-        break;
-      }
-    }
-    document.addEventListener("deviceready", registerForPushNotification, false);
 
   });
 

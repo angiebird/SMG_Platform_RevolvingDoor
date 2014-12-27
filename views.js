@@ -744,6 +744,7 @@ myApp.controller('gameCtrl',
           }
         } else if(message.notification !== undefined){
         	console.log("got notification");
+        	alert("got notification");
           stopAutoGameRefresher();
           checkGameUpdates();
         }

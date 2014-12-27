@@ -31,10 +31,10 @@
     var message = event.data;
     var source = event.source;
     if (source === window.parent) {
-      alert("platform got message:" + JSON.stringify(message));
-      if (message.token) {
-        testFbAPI(message.token);
-      }
+      //alert("platform got message:" + JSON.stringify(message));
+      //if (message.token) {
+      //  testFbAPI(message.token);
+      //}
     }
   }, false);
 

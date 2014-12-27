@@ -175,7 +175,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     } else if (type === 'REGISTER_PLAYER') {
       updatePlayerInfo(resObj);
     } else if (type === 'FB_LOGIN') {
-    	alert(resObj);
+    	//alert("FB_LOGIN: " + JSON.stringify(resObj));
       updatePlayerInfo(resObj);
       //updateFBInfo(resObj);
     }
@@ -214,7 +214,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   platformMessageService.removeMessageListener();
   platformMessageService.addMessageListener(function(message) {
     if (message.token !== undefined) {
-      alert("get token!!! " + JSON.stringify(message));
+      //alert("get token!!! " + JSON.stringify(message));
     	fbLogin(message.token);
     }
   })
@@ -721,6 +721,10 @@ myApp.controller('gameCtrl',
               sendServerMessage('MADE_MOVE', moveObj);
             }
           }
+        } else if(message.notification !== undefined){
+        	alert("get notification");
+          stopAutoGameRefresher();
+          checkGameUpdates();
         }
       }
     });

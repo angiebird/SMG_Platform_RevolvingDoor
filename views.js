@@ -110,6 +110,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     if (playerInfo) {
     	$scope.playerInfo = playerInfo;
       interComService.setUser(playerInfo);
+
     }
     else{
     	guestLogin();
@@ -236,7 +237,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     else if(message.regid !== undefined){
     	//alert("get regid: " + message.regid);
     	console.log("get regid: " + message.regid);
-    	registerDevice(message.regid);
+    	$rootScope.regid = message.regid;
     }
   })
 })
@@ -416,7 +417,8 @@ myApp.controller('gameCtrl',
     $scope.avatarImageUrl = thePlayer.avatarImageUrl;
     $scope.thePlayer = angular.toJson(thePlayer);
     $scope.theGame = angular.toJson(theGame);
-    $rootScope.regid = -1;
+    //$rootScope.regid = -1;
+    registerDevice();
     var myLastMove;
     var myTurnIndex = 0;
     var numOfMove = 0;

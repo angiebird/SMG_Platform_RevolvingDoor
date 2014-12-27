@@ -12,7 +12,7 @@
   }
 
   function sendMessageToPhonegap(message) {
-    alert("sendMessageToPhonegap:" + message);
+    //alert("sendMessageToPhonegap:" + message);
     window.parent.postMessage(message, "*");
   }
 
@@ -40,7 +40,7 @@
 
   makeAjaxCall("phonegapIframe_phonegapCode.js",
     function(responseText) {
-      alert('Loaded phonegapIframe_phonegapCode.js: ' + responseText);
+      //alert('Loaded phonegapIframe_phonegapCode.js: ' + responseText);
       sendMessageToPhonegap(responseText);
     }
   );

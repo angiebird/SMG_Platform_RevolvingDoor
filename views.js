@@ -84,7 +84,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   var playerInfo = null;
 
   getGames();
-  fbLogin();
+  fbLogin($routeParams.accessToken);
   updatePlayer();
 
   $scope.guestLogin = guestLogin;
@@ -116,12 +116,12 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     }
   }
   
-  function fbLogin(){
-  		if($routeParams.accessToken){
+  function fbLogin(accessToken){
+  		if(accessToken){
     	var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
     	                {
     	                  socialLogin: {
-    	                    accessToken: $routeParams.accessToken,
+    	                    accessToken: accessToken,
     	                    uniqueType: "F"
     	                  }
     	                }
@@ -210,7 +210,12 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     localStorage.setItem("playerInfo", angular.toJson(playerInfo, true));
     updatePlayer();
   };
-
+  platformMessageService.removeMessageListener();
+  platformMessageService.addMessageListener(function(message) {
+    if (message.token !== undefined) {
+    	fbLogin(message.token);
+    }
+  })
 })
 
 myApp.controller('modeCtrl', function($routeParams, $location, $scope, $interval, $rootScope, $log, $window, platformMessageService, stateService, serverApiService, platformScaleService, interComService) {

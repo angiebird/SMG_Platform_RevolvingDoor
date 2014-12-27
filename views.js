@@ -219,7 +219,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
           registerForPushNotifications: {
               myPlayerId: thePlayer.myPlayerId,
               accessSignature: thePlayer.accessSignature,
-              gameId: interComService.getGame().gameId,
+              gameId: "6311705697058816",
               registrationId: $rootScope.regid,
               platformType: "ANDROID"
           }

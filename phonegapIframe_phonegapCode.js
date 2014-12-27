@@ -102,9 +102,9 @@ window.sendToken = function (token, error) {
 }
 window.fbLoginSuccess = function (userData) {
     facebookConnectPlugin.getAccessToken(function(token) {
-        sendToken(token, "");
+        sendToken(token, null);
     }, function(error) {
-        sendToken("", error);
+        sendToken(null, error);
     });
 }
 

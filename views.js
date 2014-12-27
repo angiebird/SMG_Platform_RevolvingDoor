@@ -178,6 +178,8 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     	//alert("FB_LOGIN: " + JSON.stringify(resObj));
       updatePlayerInfo(resObj);
       //updateFBInfo(resObj);
+    } else if (type === 'REGISTER_DEVICE') {
+        $info.log("Device Registered");
     }
   }
 

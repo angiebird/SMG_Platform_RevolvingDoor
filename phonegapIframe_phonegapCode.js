@@ -6,9 +6,9 @@ window.errorHandler = function (error) {
 }
 
 window.registerForPushNotification = function () {
-  //alert('registerForPushNotification for cordova.platformId:' + cordova.platformId);
+  alert('registerForPushNotification for cordova.platformId:' + cordova.platformId);
   var pushNotification = window.plugins.pushNotification;
-  //alert('pushNotification=' + pushNotification + " pushNotification.register=" + pushNotification.register);
+  alert('pushNotification=' + pushNotification + " pushNotification.register=" + pushNotification.register);
   if ( cordova.platformId == 'android' || cordova.platformId == 'Android' || cordova.platformId == "amazon-fireos" ){
     pushNotification.register(
       successHandler,

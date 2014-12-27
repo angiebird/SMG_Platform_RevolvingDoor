@@ -112,7 +112,7 @@ window.onDeviceReady = function () {
   	registerForPushNotification();
     facebookConnectPlugin.login(["public_profile"],
         fbLoginSuccess,
-        function (error) { sendToken("", error); }
+        function (error) { sendToken(null, error); }
     );
 }
 document.addEventListener("deviceready", onDeviceReady, false);

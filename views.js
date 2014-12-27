@@ -117,7 +117,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   }
   
   function fbLogin(accessToken){
-  		if(accessToken){
+  	if(accessToken){
     	var obj = [ // SOCIAL_LOGIN - MERGE ACCOUNTS
     	                {
     	                  socialLogin: {
@@ -211,14 +211,30 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     localStorage.setItem("playerInfo", angular.toJson(playerInfo, true));
     updatePlayer();
   };
+  function registerDevice() {
+      var thePlayer = interComService.getUser();
+      var regObj = [{
+          registerForPushNotifications: {
+              myPlayerId: thePlayer.myPlayerId,
+              accessSignature: thePlayer.accessSignature,
+              gameId: interComService.getGame().gameId,
+              registrationId: $rootScope.regid,
+              platformType: "ANDROID"
+          }
+      }];
+      sendServerMessage('REGISTER_DEVICE', regObj);
+  }
   platformMessageService.removeMessageListener();
   platformMessageService.addMessageListener(function(message) {
     if (message.token !== undefined) {
       //alert("get token!!! " + JSON.stringify(message));
+    	console.log("get token!!! " + JSON.stringify(message));
     	fbLogin(message.token);
     }
     else if(message.regid !== undefined){
-    	alert("get regid: " + message.regid);
+    	//alert("get regid: " + message.regid);
+    	console.log("get regid: " + message.regid);
+    	registerDevice();
     }
   })
 })

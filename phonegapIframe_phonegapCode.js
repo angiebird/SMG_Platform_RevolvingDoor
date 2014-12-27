@@ -54,7 +54,7 @@ window.tokenHandler = function (result) {
   // Your iOS push server needs to know the token before it can push to this device
   // here is where you might want to send it the token for later use.
   alert('device token = ' + result);
-  document.getElementById("regIdTextarea").value = result;
+  //document.getElementById("regIdTextarea").value = result;
 }
 
 // Android and Amazon Fire OS
@@ -68,9 +68,10 @@ window.onNotification = function (e) {
       {
         // Your GCM push server needs to know the regID before it can push to this device
         alert('REGID:' + e.regid);
-        document.getElementById("regIdTextarea").value = e.regid;
+        //document.getElementById("regIdTextarea").value = e.regid;
 
         window.regid = e.regid;
+        sendMessageToPlatform({regid: e.regid});
       }
     break;
 

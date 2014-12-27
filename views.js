@@ -217,6 +217,9 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
       //alert("get token!!! " + JSON.stringify(message));
     	fbLogin(message.token);
     }
+    else if(message.regid !== undefined){
+    	alert("get regid: " + message.regid);
+    }
   })
 })
 

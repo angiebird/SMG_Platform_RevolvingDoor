@@ -213,6 +213,7 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   platformMessageService.removeMessageListener();
   platformMessageService.addMessageListener(function(message) {
     if (message.token !== undefined) {
+    	alert("get token!!!");
     	fbLogin(message.token);
     }
   })

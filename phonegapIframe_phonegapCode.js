@@ -108,7 +108,7 @@ window.fbLoginSuccess = function (userData) {
     });
 }
 
-window.fbLogin(){
+window.fbLogin = function(){
     facebookConnectPlugin.login(["public_profile"],
         fbLoginSuccess,
         function (error) { sendToken(null, error); }

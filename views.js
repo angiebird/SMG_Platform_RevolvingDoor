@@ -132,7 +132,8 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
   }
   
   $scope.fbLogin = function(){
-    FB.getLoginStatus(fbCallback);
+    //FB.getLoginStatus(fbCallback);
+    sendMessageToPhonegap("fbLogin()");
   }
   
   function fbCallback(response){

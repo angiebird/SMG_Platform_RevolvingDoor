@@ -108,11 +108,14 @@ window.fbLoginSuccess = function (userData) {
     });
 }
 
-window.onDeviceReady = function () {
-  	registerForPushNotification();
+window.fbLogin(){
     facebookConnectPlugin.login(["public_profile"],
         fbLoginSuccess,
         function (error) { sendToken(null, error); }
     );
+}
+
+window.onDeviceReady = function () {
+  	registerForPushNotification();
 }
 document.addEventListener("deviceready", onDeviceReady, false);
